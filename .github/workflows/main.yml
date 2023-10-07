@@ -1,0 +1,19 @@
+name: deploy-surge
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Installing surge
+      run: npm install --global surge
+
+    - name: Deploy to Surge
+      run: surge --project ./ --token ${{secrets.SURGE_TOKEN_EC }} --domain https://Parcial1Electiva2.surge.sh/
